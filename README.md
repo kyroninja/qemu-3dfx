@@ -20,19 +20,22 @@ Witness, experience and share your thoughts on modern CPU/GPU prowess for retro 
 Following instructions are based on `MSYS2/mingw-w64` BASH shell environment on modern Windows. It is meant to be simple and minor variations are inevitable due to different flavors of Linux distributions.
 
 Simple guide to apply the patch:<br>
-(using `00-qemu92x-mesa-glide.patch`)
+(using `03-qemu102x-mesa-glide.patch`)
 
+(Setup MSYS2 and use MINGW64 environment)
+
+    $ pacman -S mingw-w64-i686-toolchain mingw-w64-i686-glib2 mingw-w64-i686-pixman mingw-w64-i686-gtk3 mingw-w64-i686-SDL2 mingw-w64-i686-python mingw-w64-i686-ninja mingw-w64-i686-meson mingw-w64-i686-pkg-config mingw-w64-i686-libslirp
     $ mkdir ~/myqemu && cd ~/myqemu
     $ git clone https://github.com/kjliew/qemu-3dfx.git
     $ cd qemu-3dfx
-    $ wget https://download.qemu.org/qemu-9.2.2.tar.xz
-    $ tar xf qemu-9.2.2.tar.xz
-    $ cd qemu-9.2.2
+    $ wget https://download.qemu.org/qemu-10.2.0.tar.xz
+    $ tar xf qemu-10.2.0.tar.xz
+    $ cd qemu-10.2.0
     $ rsync -r ../qemu-0/hw/3dfx ../qemu-1/hw/mesa ./hw/
-    $ patch -p0 -i ../00-qemu92x-mesa-glide.patch
+    $ patch -p1 -i ../03-qemu102x-mesa-glide.patch
     $ bash ../scripts/sign_commit
     $ mkdir ../build && cd ../build
-    $ ../qemu-9.2.2/configure && make
+    $ ../configure --enable-whpx --enable-sdl --enable-gtk --disable-werror --enable-slirp --audio-drv-list=dsound,sdl --target-list=i386-softmmu
 
 ## Building Guest Wrappers
 **Requirements:**
@@ -52,6 +55,38 @@ Simple guide to apply the patch:<br>
     $ mkdir build && cd build
     $ bash ../../../scripts/conf_wrapper
     $ make && make clean
+
+**New Instructions**
+sudo apt update
+sudo apt install build-essential make sed xxd git curl wget perl libdigest-sha-perl mingw-w64-tools gcc-mingw-w64-i686 binutils-mingw-w64-i686 mingw-w64
+
+---setup djgpp---
+cd ~
+wget https://github.com/andrewwutw/build-djgpp/releases/download/v3.4/djgpp-linux64-gcc1220.tar.bz2
+
+# Extract
+sudo tar xjf djgpp-linux64-gcc1220.tar.bz2 -C /usr/local
+
+sudo ln -s /usr/local/djgpp/i586-pc-msdosdjgpp/bin/dxe3gen /usr/local/djgpp/bin/i586-pc-msdosdjgpp-dxe3gen
+sudo ln -s /usr/local/djgpp/i586-pc-msdosdjgpp/bin/dxe3res /usr/local/djgpp/bin/i586-pc-msdosdjgpp-dxe3res
+sudo ln -s /usr/local/djgpp/i586-pc-msdosdjgpp/bin/dxe3gen /usr/local/djgpp/bin/dxe3gen
+sudo ln -s /usr/local/djgpp/i586-pc-msdosdjgpp/bin/dxe3res /usr/local/djgpp/bin/dxe3res
+
+cat >> ~/.bashrc << 'EOF'
+export PATH="/usr/local/djgpp/bin:$PATH"
+export DJDIR="/usr/local/djgpp/i586-pc-msdosdjgpp"
+EOF
+
+source ~/.bashrc
+
+----setup openwatcom----
+wget https://github.com/open-watcom/open-watcom-v2/releases/download/2024-09-03-Build/open-watcom-2_0-c-linux-x64
+
+chmod +x open-watcom-2_0-c-linux-x64
+sudo ./open-watcom-2_0-c-linux-x64
+
+export WATCOM=/usr/bin/watcom
+export PATH=$PATH:$WATCOM/binl64
 
 ## Installing Guest Wrappers
 **For Win9x/ME:**  

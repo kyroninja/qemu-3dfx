@@ -90,7 +90,7 @@ source ~/.bashrc
 wget https://github.com/open-watcom/open-watcom-v2/releases/download/2024-09-03-Build/open-watcom-2_0-c-linux-x64
 
 chmod +x open-watcom-2_0-c-linux-x64
-sudo ./open-watcom-2_0-c-linux-x64
+sudo ./open-watcom-2_0-c-linux-x64 (select the full install)
 
 # Add to PATH
 export WATCOM=/usr/bin/watcom

@@ -11,6 +11,7 @@ KJ Liew \<liewkj@yahoo.com\>
     00-qemu92x-mesa-glide.patch - Patch for QEMU version 9.2.x (MESA & Glide)
     01-qemu82x-mesa-glide.patch - Patch for QEMU version 8.2.x (MESA & Glide)
     02-qemu72x-mesa-glide.patch - Patch for QEMU version 7.2.x (MESA & Glide)
+    03-qemu102x-mesa-glide.patch - Patch for QEMU version 10.2.x (MESA & Glide)
 ## QEMU Windows Guests Glide/OpenGL/Direct3D Acceleration
 Witness, experience and share your thoughts on modern CPU/GPU prowess for retro Windows games on Apple Silicon macOS, modern Windows and Linux. Most games can be installed and played in pristine condition without the hassle of hunting down unofficial, fan-made patches to play them on modern Windows or Linux/Wine.
 - YouTube channel (https://www.youtube.com/@qemu-3dfx/videos)
@@ -36,6 +37,7 @@ Simple guide to apply the patch:<br>
     $ bash ../scripts/sign_commit
     $ mkdir ../build && cd ../build
     $  ../qemu-10.2.0/configure --enable-whpx --enable-sdl --enable-gtk --disable-werror --enable-slirp --audio-drv-list=dsound,sdl --target-list=i386-softmmu
+    $ make -j$(nproc)
 
 ## Building Guest Wrappers
 **Requirements:**

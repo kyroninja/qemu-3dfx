@@ -1,0 +1,26 @@
+Only in qemu-3dfx.mod/wrappers/3dfx: build
+diff -ru '--exclude=.git' --suppress-common-lines qemu-3dfx/wrappers/3dfx/drv/Makefile qemu-3dfx.mod/wrappers/3dfx/drv/Makefile
+--- qemu-3dfx/wrappers/3dfx/drv/Makefile	2026-01-20 16:01:25.135287327 +0200
++++ qemu-3dfx.mod/wrappers/3dfx/drv/Makefile	2026-01-20 14:58:04.041069883 +0200
+@@ -1,7 +1,7 @@
+ FXLIB=../../fxlib
+ CROSS?=
+ CC=$(CROSS)gcc
+-CFLAGS=-march=x86-64-v2 -mtune=generic -mfpmath=sse
++CFLAGS=-march=x86-64 -mtune=generic -mfpmath=sse
+ CFLAGS+=-pipe -I$(FXLIB) -Wall -Wextra -Werror
+ OUTDIR?=build
+ 
+diff -ru '--exclude=.git' --suppress-common-lines qemu-3dfx/wrappers/3dfx/dxe/Makefile qemu-3dfx.mod/wrappers/3dfx/dxe/Makefile
+--- qemu-3dfx/wrappers/3dfx/dxe/Makefile	2026-01-20 16:01:25.139287331 +0200
++++ qemu-3dfx.mod/wrappers/3dfx/dxe/Makefile	2026-01-20 15:04:32.556977321 +0200
+@@ -4,7 +4,7 @@
+ CROSS=$(X86)-pc-msdosdjgpp-
+ CC=$(CROSS)gcc
+ CFLAGS=-I$(QEMU_SRC_DIR)/hw/3dfx -D__REV__=\"$(GIT)\" -Wall -Werror -O3 -fomit-frame-pointer
+-DXEGEN=dxe3gen
++DXEGEN=i586-pc-msdosdjgpp-dxe3gen
+ OUTDIR?=build
+ 
+ TARGET2=glide2x.dxe
+Only in qemu-3dfx.mod/wrappers/mesa: build

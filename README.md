@@ -101,17 +101,23 @@ export PATH=$PATH:$WATCOM/binl64
 
 **Build 3dfx Wrappers:**
 ```bash
-$ cd ~/myqemu/qemu-3dfx/wrappers/3dfx
+$ cd ~/myqemu/qemu-3dfx
+$ patch -p1 -i qemu-guest-wrappers.patch
+$ cd wrappers/3dfx
 $ mkdir build && cd build
 $ bash ../../../scripts/conf_wrapper
+(note open the Makefile and change CFLAGS=-march=x86-64-v2 -mtune=generic -mfpmath=sse -O3 to CFLAGS=-march=x86-64 -mtune=generic -mfpmath=sse -O3)
 $ make && make clean
 ```
 
 **Build Mesa Wrappers:**
 ```bash
-$ cd ~/myqemu/qemu-3dfx/wrappers/mesa
+$ cd ~/myqemu/qemu-3dfx
+$ patch -p1 -i qemu-guest-wrappers.patch (if you didn't apply the patch prior)
+$ cd wrappers/mesa
 $ mkdir build && cd build
 $ bash ../../../scripts/conf_wrapper
+(note open the Makefile and change CFLAGS=-march=x86-64-v2 -mtune=generic -mfpmath=sse -O3 to CFLAGS=-march=x86-64 -mtune=generic -mfpmath=sse -O3)
 $ make && make clean
 ```
 

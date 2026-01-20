@@ -35,7 +35,7 @@ Simple guide to apply the patch:<br>
     $ patch -p1 -i ../03-qemu102x-mesa-glide.patch
     $ bash ../scripts/sign_commit
     $ mkdir ../build && cd ../build
-    $ ../configure --enable-whpx --enable-sdl --enable-gtk --disable-werror --enable-slirp --audio-drv-list=dsound,sdl --target-list=i386-softmmu
+    $  ../qemu-10.2.0/configure --enable-whpx --enable-sdl --enable-gtk --disable-werror --enable-slirp --audio-drv-list=dsound,sdl --target-list=i386-softmmu
 
 ## Building Guest Wrappers
 **Requirements:**
